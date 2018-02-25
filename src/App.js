@@ -7,14 +7,18 @@ class App extends Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      description: '',
+      gender: 0,
+      language: '',
+      checkbox:true
     }
   }
 
   onHandleChange(event){
     const target = event.target
     const name = target.name
-    const value = target.value
+    const value = target.type === 'checkbox' ? target.checked : target.value
     this.setState({
       [name] : value
     })
@@ -43,6 +47,7 @@ class App extends Component {
                       <div className="form-group">
                         <label>Username: </label>
                         <input 
+                              required="required"
                               type="text" 
                               className="form-control" 
                               name="username" 
@@ -52,12 +57,76 @@ class App extends Component {
                       <div className="form-group">
                         <label>Password: </label>
                         <input 
+                              required="required"
+                              placeholder="username@email.com"
                               type="password" 
                               className="form-control" 
                               name="password" 
                               onChange={ this.onHandleChange.bind(this) }
                         />
                       </div>
+
+                      <div className="form-group">
+                        <label>Describtion: </label>
+                        <textarea 
+                          required="required"
+                          className="form-control" 
+                          rows="3" 
+                          name="description" 
+                          onChange={ this.onHandleChange.bind(this) }
+                        ></textarea>
+                      </div>
+
+                        <label>Gender: </label>
+                        <select 
+                          required="required"
+                          className="form-control" 
+                          name="gender" 
+                          value={ this.state.gender }
+                          onChange={ this.onHandleChange.bind(this) }
+                        >
+                          <option value={0}>female</option>
+                          <option value={1}>male</option>
+                        </select><br/>
+                        
+                        <label>language</label>
+                        <div className="radio">
+                          <label>
+                            <input 
+                              type="radio" 
+                              name="language" 
+                              value="english"
+                              onChange={ this.onHandleChange.bind(this) }
+                            />
+                            english
+                          </label><br/>
+                          <label>
+                            <input 
+                              type="radio" 
+                              name="language" 
+                              value="vietnamese"
+                              onChange={ this.onHandleChange.bind(this) }
+                            
+                            />
+                            vietnamese
+                          </label>
+                        </div>
+                      
+                        
+                        <div className="checkbox">
+                          <label>
+                            <input 
+                            type="checkbox"
+                            name="checkbox"
+                            value={true}
+                            onChange={ this.onHandleChange.bind(this) }
+                            defaultChecked={this.state.checkbox}
+                            />
+                            Checkbox
+                          </label>
+                        </div>
+                        
+
                       <button type="submit" className="btn btn-primary">Submit</button>&nbsp;
                       <button type="reset" className="btn btn-default">Reset </button>
                     </form>
